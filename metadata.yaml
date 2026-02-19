@@ -1,0 +1,143 @@
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: certificate-authority-service
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    title: terraform-google-cas
+    source:
+      repo: https://github.com/vandnagarggoogle/terraform-google-cas.git
+      sourceType: git
+    version: 1.0.20
+    actuationTool:
+      flavor: Terraform
+      version: ">= 1.5.7"
+    description:
+      tagline: This is an auto-generated module.
+      detailed: "This module was generated from "
+      preDeploy: To deploy this blueprint you must have an active billing account and billing permissions.
+    icon: assets/icon.png
+    costEstimate:
+      description: Blueprint cost details
+      url: https://cloud.google.com/products/calculator?id=02fb0c45-cc29-4567-8cc6-f72ac9024add
+  content:
+    architecture:
+      diagramUrl: https://www.link-to-architecture-diagram.com
+      description:
+        - 1. Architecture description step no. 1
+        - 2. Architecture description step no. 2
+        - 3. Architecture description step no. N
+    documentation:
+      - title: Hosting a Static Website
+        url: https://cloud.google.com/storage/docs/hosting-static-website
+    examples:
+      - name: simple_example
+        location: examples/simple_example
+  interfaces:
+    variables:
+      - name: project_id
+        varType: string
+        required: true
+      - name: location
+        varType: string
+        required: true
+      - name: ca_pool_config
+        varType: |-
+          object({
+              create_pool = optional(object({
+                name            = string
+                enterprise_tier = optional(bool, false)
+              }))
+              use_pool = optional(object({
+                id = string
+              }))
+            })
+        required: true
+      - name: ca_configs
+        varType: |-
+          map(object({
+              is_ca                                  = optional(bool, true)
+              deletion_protection                    = optional(bool, false)
+              skip_grace_period                      = optional(bool, true)
+              ignore_active_certificates_on_deletion = optional(bool, false)
+              gcs_bucket                             = optional(string)
+              labels                                 = optional(map(string), {})
+              subject = object({
+                common_name  = string
+                organization = string
+                country_code = optional(string)
+                locality     = optional(string)
+                postal_code  = optional(string)
+                province     = optional(string)
+                street_address = optional(string)
+                organizational_unit = optional(string)
+              })
+              subject_alt_name = optional(object({
+                dns_names       = optional(list(string))
+                email_addresses = optional(list(string))
+                ip_addresses    = optional(list(string))
+                uris            = optional(list(string))
+              }))
+              key_usage = object({
+                cert_sign          = optional(bool, true)
+                crl_sign           = optional(bool, true)
+                server_auth        = optional(bool, true)
+                client_auth        = optional(bool, false)
+                code_signing       = optional(bool, false)
+                content_commitment = optional(bool, false)
+                data_encipherment  = optional(bool, false)
+                decipher_only      = optional(bool, false)
+                digital_signature  = optional(bool, false)
+                email_protection   = optional(bool, false)
+                encipher_only      = optional(bool, false)
+                key_agreement      = optional(bool, false)
+                key_encipherment   = optional(bool, true)
+                ocsp_signing       = optional(bool, false)
+                time_stamping      = optional(bool, false)
+              })
+              key_spec = object({
+                algorithm  = optional(string, "RSA_PKCS1_2048_SHA256")
+                kms_key_id = optional(string)
+              })
+              subordinate_config = optional(object({
+                root_ca_id               = string
+                pem_issuer_certificates = optional(list(string))
+              }))
+            }))
+        defaultValue: {}
+      - name: iam
+        varType: |-
+          map(object({
+              role   = string
+              member = string
+            }))
+        defaultValue: {}
+    outputs:
+      - name: ca_chains
+        description: The CA chains in PEM format.
+      - name: ca_ids
+        description: The CA ids.
+      - name: ca_pool
+        description: The CA pool resource.
+      - name: ca_pool_id
+        description: The FULL ID of the CA Pool for the SWP.
+      - name: ca_pool_name
+        description: CA pool name
+      - name: cas
+        description: The Certificate Authority resources.
+      - name: ca_roots
+        description: The root CA certificates in PEM format, concatenated with newlines.
+  requirements:
+    roles:
+      - level: Project
+        roles:
+          - roles/owner
+    services:
+      - cloudresourcemanager.googleapis.com
+      - storage-api.googleapis.com
+      - serviceusage.googleapis.com
+    providerVersions:
+      - source: hashicorp/google
+        version: ">= 5.0"

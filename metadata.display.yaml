@@ -1,0 +1,47 @@
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: certificate-authority-service-display
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    title: terraform-google-cas
+    source:
+      repo: https://github.com/vandnagarggoogle/terraform-google-cas.git
+      sourceType: git
+  ui:
+    input:
+      variables:
+        ca_configs:
+          name: ca_configs
+          title: Certificate Authority Definitions
+        ca_pool_config:
+          name: ca_pool_config
+          title: CA Pool Configuration
+        iam:
+          name: IAM Permissions
+          title: CA Pool Access Control
+          subtext: Use this to grant 'roles/privateca.certificateManager' to your SWP service account.
+        location:
+          name: location
+          title: Region
+        project_id:
+          name: project_id
+          title: Project ID
+    runtime:
+      outputs:
+        ca_chains:
+          visibility: VISIBILITY_ROOT
+        ca_ids:
+          visibility: VISIBILITY_ROOT
+        ca_pool:
+          visibility: VISIBILITY_ROOT
+        ca_pool_id:
+          visibility: VISIBILITY_ROOT
+        ca_pool_name:
+          visibility: VISIBILITY_ROOT
+        cas:
+          visibility: VISIBILITY_ROOT
+        ca_roots:
+          visibility: VISIBILITY_ROOT
