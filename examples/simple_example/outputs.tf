@@ -14,7 +14,22 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
-  description = "The name of the bucket."
-  value       = module.cas.bucket_name
+output "project_id" {
+  description = "The ID of the project."
+  value       = var.project_id
+}
+
+output "ca_pool_name" {
+  description = "The short name of the CA Pool."
+  value       = module.cas.ca_pool_name
+}
+
+output "ca_pool_id" {
+  description = "The full resource ID of the CA Pool."
+  value       = module.cas.ca_pool_id
+}
+
+output "ca_ids" {
+  description = "The CA ids."
+  value       = module.cas.ca_ids
 }

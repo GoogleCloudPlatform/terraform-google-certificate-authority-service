@@ -152,8 +152,8 @@ resource "google_privateca_certificate_authority" "default" {
 resource "google_privateca_ca_pool_iam_member" "default" {
   for_each = var.iam
 
-  # Use the short name of the CA Pool
-  ca_pool  = local.ca_pool_short_name
+  ca_pool  = local.ca_pool_full_id
+
   project  = var.project_id
   location = var.location
 

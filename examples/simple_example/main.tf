@@ -17,6 +17,30 @@
 module "cas" {
   source = "../.."
 
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
+  project_id = var.project_id
+  location   = "us-central1"
+
+  ca_pool_config = {
+    create_pool = {
+      name            = "simple-pool-2"
+      enterprise_tier = false # Creates a DEVOPS tier pool
+    }
+  }
+
+  ca_configs = {
+    "simple-ca" = {
+      is_ca = true
+      subject = {
+        common_name  = "simple-ca"
+        organization = "Example Org"
+      }
+      key_usage = {
+        cert_sign = true
+        crl_sign  = true
+      }
+      key_spec = {
+        algorithm = "RSA_PKCS1_2048_SHA256"
+      }
+    }
+  }
 }

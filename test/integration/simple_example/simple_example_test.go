@@ -12,28 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package multiple_buckets
+package simple_example
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/gcloud"
 	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/tft"
-	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/utils"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestSimpleExample(t *testing.T) {
-	example := tft.NewTFBlueprintTest(t)
+	// Initializes the test using the example directory
+	bpt := tft.NewTFBlueprintTest(t)
 
-	example.DefineVerify(func(assert *assert.Assertions) {
-		example.DefaultVerify(assert)
+	bpt.DefineVerify(func(assert *assert.Assertions) {
+		// Verify no drift happens after terraform apply
+		bpt.DefaultVerify(assert)
 
-		projectID := example.GetStringOutput("project_id")
-		services := gcloud.Run(t, "services list", gcloud.WithCommonArgs([]string{"--project", projectID, "--format", "json"})).Array()
+		// Get outputs from the Terraform example
+		projectID := bpt.GetStringOutput("project_id")
+		poolName := bpt.GetStringOutput("ca_pool_name")
+		location := "us-central1"
 
-		match := utils.GetFirstMatchResult(t, services, "config.name", "storage.googleapis.com")
-		assert.Equal("ENABLED", match.Get("state").String(), "storage service should be enabled")
+		// Run a gcloud command to inspect the newly created Private CA Pool
+		poolOp := gcloud.Runf(t, "privateca pools describe %s --location %s --project %s", poolName, location, projectID)
+
+		// Assert the Tier matches our example configuration (enterprise_tier = false => DEVOPS)
+		assert.Equal("DEVOPS", poolOp.Get("tier").String(), "CA Pool tier should be DEVOPS")
+
+		// Assert the name is correct
+		expectedName := fmt.Sprintf("projects/%s/locations/%s/caPools/%s", projectID, location, poolName)
+		assert.Equal(expectedName, poolOp.Get("name").String(), "CA Pool full name should match")
 	})
-	example.Test()
+
+	bpt.Test()
 }
