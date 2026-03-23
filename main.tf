@@ -33,31 +33,14 @@ locals {
   )
 }
 
-# --- Step 1: Enable the Private CA API ---
-resource "google_project_service" "privateca_api" {
-  project            = var.project_id
-  service            = "privateca.googleapis.com"
-  disable_on_destroy = false
-}
-
-# --- Step 2: Handle API Propagation Delay ---
-resource "time_sleep" "wait_for_privateca_api" {
-  depends_on      = [google_project_service.privateca_api]
-  create_duration = "45s"
-}
-
-# --- Step 3: Create the CA Pool ---
 resource "google_privateca_ca_pool" "default" {
   count    = var.ca_pool_config.create_pool != null ? 1 : 0
   name     = var.ca_pool_config.create_pool.name
   location = var.location
   project  = var.project_id
   tier     = var.ca_pool_config.create_pool.enterprise_tier ? "ENTERPRISE" : "DEVOPS"
-
-  depends_on = [time_sleep.wait_for_privateca_api]
 }
 
-# --- Step 4: Create Certificate Authorities ---
 resource "google_privateca_certificate_authority" "default" {
   for_each = var.ca_configs
 
@@ -148,7 +131,6 @@ resource "google_privateca_certificate_authority" "default" {
   depends_on = [google_privateca_ca_pool.default]
 }
 
-# --- Step 5: IAM Manager (CA Pool Access) ---
 resource "google_privateca_ca_pool_iam_member" "default" {
   for_each = var.iam
 

@@ -1,16 +1,29 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: blueprints.cloud.google.com/v1alpha1
 kind: BlueprintMetadata
 metadata:
-  name: certificate-authority-service
+  name: terraform-google-certificate-authority-service
   annotations:
     config.kubernetes.io/local-config: "true"
 spec:
   info:
     title: terraform-google-cas
     source:
-      repo: https://github.com/vandnagarggoogle/terraform-google-cas.git
+      repo: https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service.git
       sourceType: git
-    version: 1.0.22
     actuationTool:
       flavor: Terraform
       version: ">= 1.5.7"
@@ -122,22 +135,27 @@ spec:
       - name: ca_pool
         description: The CA pool resource.
       - name: ca_pool_id
-        description: The FULL ID of the CA Pool for the SWP.
+        description: The full resource ID of the CA Pool (e.g., 'projects/my-project/locations/us-central1/caPools/my-subordinate-pool-v1').
       - name: ca_pool_name
-        description: CA pool name
-      - name: cas
-        description: The Certificate Authority resources.
+        description: The short, user-defined name of the CA Pool (e.g., 'my-subordinate-pool-v1').
       - name: ca_roots
         description: The root CA certificates in PEM format, concatenated with newlines.
+      - name: cas
+        description: The Certificate Authority resources.
   requirements:
     roles:
       - level: Project
         roles:
-          - roles/owner
+          - roles/privateca.admin
+          - roles/iam.serviceAccountUser
+          - roles/storage.objectAdmin
     services:
+      - privateca.googleapis.com
       - cloudresourcemanager.googleapis.com
-      - storage-api.googleapis.com
       - serviceusage.googleapis.com
+      - storage-api.googleapis.com
+      - storage.googleapis.com
+      - cloudkms.googleapis.com
     providerVersions:
       - source: hashicorp/google
-        version: ">= 5.0"
+        version: ">= 6.46, < 8"

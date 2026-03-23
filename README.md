@@ -65,8 +65,9 @@ Functional examples are included in the
 | ca\_chains | The CA chains in PEM format. |
 | ca\_ids | The CA ids. |
 | ca\_pool | The CA pool resource. |
-| ca\_pool\_id | The FULL ID of the CA Pool for the SWP. |
-| ca\_pool\_name | CA pool name |
+| ca\_pool\_id | The full resource ID of the CA Pool (e.g., 'projects/my-project/locations/us-central1/caPools/my-subordinate-pool-v1'). |
+| ca\_pool\_name | The short, user-defined name of the CA Pool (e.g., 'my-subordinate-pool-v1'). |
+| ca\_roots | The root CA certificates in PEM format, concatenated with newlines. |
 | cas | The Certificate Authority resources. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

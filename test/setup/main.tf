@@ -25,8 +25,11 @@ module "project" {
   billing_account   = var.billing_account
 
   activate_apis = [
+    "privateca.googleapis.com",
     "cloudresourcemanager.googleapis.com",
+    "serviceusage.googleapis.com",
     "storage-api.googleapis.com",
-    "serviceusage.googleapis.com"
+    "storage.googleapis.com",
+    "cloudkms.googleapis.com",
   ]
 }
