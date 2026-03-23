@@ -22,7 +22,7 @@ spec:
   info:
     title: terraform-google-cas
     source:
-      repo: https://github.com/vandnagarggoogle/terraform-google-certificate-authority-service.git
+      repo: https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service.git
       sourceType: git
   ui:
     input:
