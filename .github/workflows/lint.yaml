@@ -75,4 +75,3 @@ jobs:
         env:
           TITLE: ${{ github.event.pull_request.title }}
         run: 'echo "$TITLE" | npx commitlint --verbose'
-        
