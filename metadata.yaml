@@ -151,7 +151,9 @@ spec:
     roles:
       - level: Project
         roles:
-          - roles/owner
+          - roles/privateca.admin
+          - roles/iam.serviceAccountUser
+          - roles/storage.objectAdmin
     services:
       - privateca.googleapis.com
       - cloudresourcemanager.googleapis.com
