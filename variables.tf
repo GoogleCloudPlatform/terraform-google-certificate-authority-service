@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-variable "project_id" { type = string }
-variable "location"   { type = string }
+variable "project_id" { 
+  type = string
+  description = "The ID of the project in which the resources will be created." 
+}
+variable "location"   { 
+  type = string
+  description = "The location for the CA pool and certificate authority."
+}
 
 variable "ca_pool_config" {
   type = object({
@@ -27,6 +33,7 @@ variable "ca_pool_config" {
       id = string
     }))
   })
+  description = "Configuration for the Certificate Authority pool."
 }
 
 variable "ca_configs" {
@@ -80,6 +87,7 @@ variable "ca_configs" {
     }))
   }))
   default = {}
+  description = "List of configurations for the Certificate Authorities to create."
 }
 
 variable "iam" {
@@ -88,4 +96,5 @@ variable "iam" {
     member = string
   }))
   default = {}
+  description = "IAM bindings to apply to the CA pool."
 }
