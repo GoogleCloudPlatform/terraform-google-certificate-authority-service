@@ -16,8 +16,8 @@
 
 locals {
   int_required_roles = [
-    "roles/privateca.admin"
-    "roles/iam.serviceAccountUser"
+    "roles/privateca.admin",
+    "roles/iam.serviceAccountUser",
     "roles/storage.objectAdmin"
   ]
 }
