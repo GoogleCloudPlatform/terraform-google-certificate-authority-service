@@ -33,7 +33,7 @@ output "ca_ids" {
 output "ca_pool" {
   description = "The CA pool resource."
   # Use one() to fix the "Missing resource instance key" error
-  value       = one(google_privateca_ca_pool.default)
+  value = one(google_privateca_ca_pool.default)
 }
 
 output "cas" {
