@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-variable "project_id" { type = string }
-variable "location"   { type = string }
+variable "project_id" {
+  type        = string
+  description = "The ID of the project in which the resources will be created."
+}
+variable "location" {
+  type        = string
+  description = "The location for the CA pool and certificate authority."
+}
 
 variable "ca_pool_config" {
   type = object({
@@ -27,6 +33,7 @@ variable "ca_pool_config" {
       id = string
     }))
   })
+  description = "Configuration for the Certificate Authority pool."
 }
 
 variable "ca_configs" {
@@ -38,13 +45,13 @@ variable "ca_configs" {
     gcs_bucket                             = optional(string)
     labels                                 = optional(map(string), {})
     subject = object({
-      common_name  = string
-      organization = string
-      country_code = optional(string)
-      locality     = optional(string)
-      postal_code  = optional(string)
-      province     = optional(string)
-      street_address = optional(string)
+      common_name         = string
+      organization        = string
+      country_code        = optional(string)
+      locality            = optional(string)
+      postal_code         = optional(string)
+      province            = optional(string)
+      street_address      = optional(string)
       organizational_unit = optional(string)
     })
     subject_alt_name = optional(object({
@@ -75,11 +82,12 @@ variable "ca_configs" {
       kms_key_id = optional(string)
     })
     subordinate_config = optional(object({
-      root_ca_id               = string
+      root_ca_id              = string
       pem_issuer_certificates = optional(list(string))
     }))
   }))
-  default = {}
+  default     = {}
+  description = "List of configurations for the Certificate Authorities to create."
 }
 
 variable "iam" {
@@ -87,5 +95,6 @@ variable "iam" {
     role   = string
     member = string
   }))
-  default = {}
+  default     = {}
+  description = "IAM bindings to apply to the CA pool."
 }
