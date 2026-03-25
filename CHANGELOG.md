@@ -8,6 +8,13 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.1.1](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.0...v0.1.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* added version details ([e2a2ea5](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/e2a2ea5c74835d85eee6c130e01250eb4305caa9))
+
 ## [0.1.0](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.0.1...v0.1.0) (2026-03-24)
 
 
