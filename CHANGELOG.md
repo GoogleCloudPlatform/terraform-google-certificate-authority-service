@@ -8,6 +8,19 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.1.2](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.1...v0.1.2) (2026-03-26)
+
+
+### Features
+
+* added version in metadata ([82d79ac](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/82d79ac68a4d987c9b85cb1f776eb21e16bd45e6))
+* enforce mutually exclusive ca_pool_config ([a42c499](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/a42c499ee65b2609733df163466915e9217b4b77))
+
+
+### Miscellaneous Chores
+
+* manual version override ([d3951fc](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/d3951fc4c39c2fe3a3418cc03b50a9cf9fee4ca8))
+
 ## [0.1.1](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.0...v0.1.1) (2026-03-25)
 
 
