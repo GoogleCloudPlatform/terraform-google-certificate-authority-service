@@ -33,7 +33,12 @@ variable "ca_pool_config" {
       id = string
     }))
   })
-  description = "Configuration for the Certificate Authority pool."
+  description = "Configuration for the Certificate Authority pool. Exactly one of 'create_pool' (to create a new pool) or 'use_pool' (to use an existing one) must be provided."
+
+  validation {
+    condition     = (var.ca_pool_config.create_pool != null) != (var.ca_pool_config.use_pool != null)
+    error_message = "Exactly one of 'create_pool' or 'use_pool' must be specified in 'ca_pool_config'."
+  }
 }
 
 variable "ca_configs" {
