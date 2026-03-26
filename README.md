@@ -37,7 +37,7 @@ Basic usage of this module is as follows:
 ```hcl
 module "cas" {
   source  = "terraform-google-modules/cas/google"
-  version = "~> 0.1"
+  version = "~> 0.2"
 
   project_id  = "<PROJECT ID>"
   bucket_name = "gcs-test-bucket"
