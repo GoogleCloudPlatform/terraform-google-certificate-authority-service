@@ -8,6 +8,14 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.1.3](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.2...v0.1.3) (2026-06-03)
+
+
+### Bug Fixes
+
+* added desired state varaible for ca_pool_configuration ([1aea367](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/1aea36700038d775df48749de9b315d9d73c486f))
+* added desired state varaible for ca_pool_configuration ([cbbdc20](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/cbbdc2010c6a57a7ba6d47a294bdb617be5f05b8))
+
 ## [0.1.2](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.1...v0.1.2) (2026-03-26)
 
 
