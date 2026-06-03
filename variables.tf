@@ -45,6 +45,7 @@ variable "ca_configs" {
   type = map(object({
     is_ca                                  = optional(bool, true)
     deletion_protection                    = optional(bool, false)
+    desired_state                          = optional(string, "ENABLED")
     skip_grace_period                      = optional(bool, true)
     ignore_active_certificates_on_deletion = optional(bool, false)
     gcs_bucket                             = optional(string)

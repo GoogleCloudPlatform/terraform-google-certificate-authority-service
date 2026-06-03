@@ -54,6 +54,7 @@ resource "google_privateca_certificate_authority" "default" {
   type = each.value.subordinate_config != null ? "SUBORDINATE" : "SELF_SIGNED"
 
   deletion_protection                    = each.value.deletion_protection
+  desired_state                          = each.value.desired_state
   skip_grace_period                      = each.value.skip_grace_period
   ignore_active_certificates_on_deletion = each.value.ignore_active_certificates_on_deletion
   gcs_bucket                             = each.value.gcs_bucket
