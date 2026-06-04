@@ -140,7 +140,7 @@ spec:
         defaultValue: []
         connections:
           - source:
-              source: github.com/Daisyprakash/terraform-google-secure-web-proxy
+              source: github.com/GoogleCloudPlatform/terraform-google-secure-web-proxy
               version: ">= 0.4.1"
             spec:
               outputExpr: "[\"roles/privateca.certificateManager\"]"
