@@ -8,6 +8,13 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 This changelog is generated automatically based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [0.1.4](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.3...v0.1.4) (2026-06-04)
+
+
+### Bug Fixes
+
+* added logic to assign the role to the network security default sa ([6ccda8d](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/commit/6ccda8d648b544ebb6afb7f778e1306d470311d7))
+
 ## [0.1.3](https://github.com/GoogleCloudPlatform/terraform-google-certificate-authority-service/compare/v0.1.2...v0.1.3) (2026-06-03)
 
 
