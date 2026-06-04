@@ -104,3 +104,9 @@ variable "iam" {
   default     = {}
   description = "IAM bindings to apply to the CA pool."
 }
+
+variable "network_security_sa_roles" {
+  description = "A list of roles to assign to the Network Security service agent."
+  type        = list(string)
+  default     = []
+}

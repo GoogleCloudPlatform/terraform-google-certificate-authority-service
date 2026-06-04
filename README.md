@@ -56,6 +56,7 @@ Functional examples are included in the
 | ca\_pool\_config | Configuration for the Certificate Authority pool. Exactly one of 'create\_pool' (to create a new pool) or 'use\_pool' (to use an existing one) must be provided. | <pre>object({<br>    create_pool = optional(object({<br>      name            = string<br>      enterprise_tier = optional(bool, false)<br>    }))<br>    use_pool = optional(object({<br>      id = string<br>    }))<br>  })</pre> | n/a | yes |
 | iam | IAM bindings to apply to the CA pool. | <pre>map(object({<br>    role   = string<br>    member = string<br>  }))</pre> | `{}` | no |
 | location | The location for the CA pool and certificate authority. | `string` | n/a | yes |
+| network\_security\_sa\_roles | A list of roles to assign to the Network Security service agent. | `list(string)` | `[]` | no |
 | project\_id | The ID of the project in which the resources will be created. | `string` | n/a | yes |
 
 ## Outputs

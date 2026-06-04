@@ -145,3 +145,21 @@ resource "google_privateca_ca_pool_iam_member" "default" {
 
   depends_on = [google_privateca_ca_pool.default]
 }
+
+data "google_project" "project" {
+  project_id = var.project_id
+}
+
+resource "google_privateca_ca_pool_iam_member" "network_security_sa_roles" {
+  for_each = toset(var.network_security_sa_roles)
+
+  ca_pool = local.ca_pool_full_id
+
+  project  = var.project_id
+  location = var.location
+
+  role   = each.value
+  member = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-networksecurity.iam.gserviceaccount.com"
+
+  depends_on = [google_privateca_ca_pool.default]
+}
