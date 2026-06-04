@@ -134,6 +134,16 @@ spec:
               member = string
             }))
         defaultValue: {}
+      - name: network_security_sa_roles
+        description: A list of roles to assign to the Network Security service agent.
+        varType: list(string)
+        defaultValue: []
+        connections:
+          - source:
+              source: github.com/Daisyprakash/terraform-google-secure-web-proxy
+              version: ">= 0.4.1"
+            spec:
+              outputExpr: "[\"roles/privateca.certificateManager\"]"
     outputs:
       - name: ca_chains
         description: The CA chains in PEM format.
