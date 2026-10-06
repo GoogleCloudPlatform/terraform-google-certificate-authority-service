@@ -40,6 +40,9 @@ spec:
         location:
           name: location
           title: Region
+        network_security_sa_roles:
+          name: network_security_sa_roles
+          title: Network Security Sa Roles
         project_id:
           name: project_id
           title: Project ID
